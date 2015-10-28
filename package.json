@@ -1,0 +1,36 @@
+{
+  "name": "icecast-log-parser",
+  "version": "1.0.0",
+  "description": "Icecast access log stream parser.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha -- -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alvassin/nodejs-icecast-log-parser.git"
+  },
+  "author": "Alexander Vasin <hello@alvass.in>",
+  "license": "MIT",
+  "keywords": [
+    "icecast",
+    "radio",
+    "stats",
+    "log",
+    "monitoring",
+    "parser"
+  ],
+  "bugs": {
+    "url": "https://github.com/alvassin/nodejs-icecast-log-parser/issues"
+  },
+  "homepage": "https://github.com/alvassin/nodejs-icecast-log-parser#readme",
+  "devDependencies": {
+    "codeclimate-test-reporter": "^0.1.1",
+    "istanbul": "^0.3.22",
+    "mocha": "^2.2.5"
+  }
+}
