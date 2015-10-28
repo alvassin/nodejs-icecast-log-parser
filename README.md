@@ -52,7 +52,7 @@ parser.on('entry', function(entry) {
 });
 ```
 #### parser.error
-Parsing errors will cause `error` event & data processing stop. You can use [parser.resume](#resume) method to continue data processing.
+Parsing errors will cause `error` event & data processing stop. Use [parser.resume](#resume) method to continue data processing.
 ```js
 parser.on('error', function(error) {
   console.log(error);
