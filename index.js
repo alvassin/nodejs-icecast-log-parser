@@ -114,7 +114,7 @@ function get_mup_from(m) {
     } else {
         result[0] = '';
         result[1] = m;
-        result[3] = '';
+        result[2] = '';
     }
     return result;
 }
