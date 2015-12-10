@@ -112,9 +112,15 @@ function get_mup_from(m) {
         result[1] = arr[1];
         result[2] = arr[2];
     } else {
-        result[0] = '';
-        result[1] = m;
-        result[2] = '';
+        if (arr.length > 1) {
+            result[0] = arr[0];
+            result[1] = arr[1];
+            result[2] = '';
+        } else {
+            result[0] = '';
+            result[1] = m;
+            result[2] = '';
+        }
     }
     return result;
 }
