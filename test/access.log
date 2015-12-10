@@ -1,3 +1,6 @@
 127.0.0.1 - - [19/Jun/2015:18:58:25 +0300] "GET /tes
+127.0.0.1 - - [19/Jun/2015:18:58:25 +0300] "/test.mp3" 302 170 "-" "Samsung SM-T235 stagefright/1.2 (Linux;Android 4.4.2)" 0
+127.0.0.1 - - [19/Jun/2015:18:58:25 +0300] "GET /test.mp3" 302 170 "-" "Samsung SM-T235 stagefright/1.2 (Linux;Android 4.4.2)" 0
+127.0.0.1 - - [19/Jun/2015:18:58:25 +0300] "GET /test.mp3?blablalba" 302 170 "-" "Samsung SM-T235 stagefright/1.2 (Linux;Android 4.4.2)" 0
 127.0.0.1 - - [19/Jun/2015:18:58:25 +0300] "GET /test.mp3 HTTP/1.0" 302 170 "-" "Samsung SM-T235 stagefright/1.2 (Linux;Android 4.4.2)" 0
 127.0.0.1 - - [19/Jun/2015:18:58:26 +0300] "GET /test.mp3 HTTP/1.0" 302 170 "http://example.com/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36" 1
