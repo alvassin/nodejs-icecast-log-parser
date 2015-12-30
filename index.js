@@ -103,11 +103,11 @@ IcecastLogParser.prototype.parseLine = function(line) {
 
 function parsePlaylistLog(line) {
     var matches = line.split('|');
-    var title = matches[3].replace(' -', '').trim();
+    var title = (matches[3]) ? matches.replace(' -', '').trim() : "";
     return {
         date     : moment(matches[0], "DD/MMM/YYYY:hh:mm:ss Z").valueOf(),
-        mount    : matches[1],
-        count    : parseInt(matches[2]),
+        mount    : (matches[1]) ? matches[1] : '',
+        count    : (matches[2]) ? parseInt(matches[2]) : '',
         meta     : title
     };
 }
