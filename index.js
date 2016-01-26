@@ -29,7 +29,7 @@ function IcecastAccessLogParser(options) {
    * for parsing access log lines
    * @var {RegExp}
    */
-  this.regExp = /^(\S+) - \S+ \[([^:\]]+):([^\]]+)\] "(\S+) (\S+) \S+" (\d+) (\d+) "(\S+)" "([^"]+)" (\d+)/
+  this.regExp = /(\S+) - \S+ \[([^:\]]+):([^\]]+)\] "(.*?)" (\d+) (\d+) "(.*?)" "(.*?)" (\d+)/;
 
   /**
    * Source stream
@@ -68,8 +68,8 @@ IcecastAccessLogParser.prototype._write = function(chunk, encoding, done) {
     if (entry) {
       this.emit('entry', entry);
     } else {
-      this.emit('error', new Error('Unable to parse line "' + lines[i] + '"'));
-    }    
+      this.emit('error', new Error('Unable to parse line(' + i + ') "' + lines[i]));
+    }
   }
 
   done();
@@ -82,23 +82,48 @@ IcecastAccessLogParser.prototype._write = function(chunk, encoding, done) {
  * @return {object}
  */
 IcecastAccessLogParser.prototype.parseLine = function(line) {
-  var matches = line.match(this.regExp);
-  if (matches === null) {
-    return null;
-  }
 
-  return {
-    ip       : matches[1],
-    date     : Date.parse(matches[2] + ' ' + matches[3]),
-    method   : matches[4],
-    url      : matches[5],
-    status   : parseInt(matches[6]),
-    size     : parseInt(matches[7]),
-    referer  : matches[8] !== '-' ? matches[8] : null,
-    agent    : matches[9] !== '-' ? matches[9] : null,
-    duration : parseInt(matches[10])
-  };
+    var matches = this.regExp.exec(line);
+    if (matches === null) {
+      return null;
+    }
+
+    var mup = get_mup_from(matches[4]);
+    return {
+      ip       : matches[1],
+      date     : Date.parse(matches[2] + ' ' + matches[3]),
+      method   : mup[0],
+      url      : mup[1],
+      protocol : mup[2],
+      status   : parseInt(matches[5]),
+      size     : parseInt(matches[6]),
+      referer  : matches[7] !== '-' ? matches[7] : null,
+      agent    : matches[8] !== '-' ? matches[8] : null,
+      duration : parseInt(matches[9])
+    };
 };
+
+// get method, url, protocol (mup)
+function get_mup_from(m) {
+    var arr = m.split(" ");
+    var result = [];
+    if (arr.length > 2) {
+        result[0] = arr[0];
+        result[1] = arr[1];
+        result[2] = arr[2];
+    } else {
+        if (arr.length > 1) {
+            result[0] = arr[0];
+            result[1] = arr[1];
+            result[2] = '';
+        } else {
+            result[0] = '';
+            result[1] = m;
+            result[2] = '';
+        }
+    }
+    return result;
+}
 
 /**
  * Continues data pulling from source stream.
